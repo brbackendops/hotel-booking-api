@@ -1,0 +1,24 @@
+version: '3'
+services:
+  proxy:
+    build:
+      context: .
+      args:
+        - name=value
+      dockerfile: Dockerfile.proxy
+    
+  hotel_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "7000:7000"
+    env_file:
+      - fileName
+    depends_on:
+      - db
+  db:
+    image: ''
+    volumes:
+      - ""
+      
