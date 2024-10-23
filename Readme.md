@@ -14,21 +14,19 @@
 
 ### Monitoring
 
-* [ ]  grafana
+* [ ]  express-status-monitor
 
 ### Docker
 
-* [ ]  docker
+* [X]  docker
 
 ### Proxy
 
-* [ ]  proxy
-
-### API
+* [X]  proxy
 
 ### Test
 
-* [ ]  user functional test
+* [X]  user functional test
 * [ ]  user unit test
 * [ ]  hotel functional test
 * [ ]  hotel unit test
