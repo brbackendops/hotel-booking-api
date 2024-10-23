@@ -5,6 +5,8 @@ const userServ = require('../services/user/user_serv')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 // mock the repo
+
+
 jest.mock('../repo/user_repo')
 jest.mock('../services/user/user_serv')
 jest.mock('bcrypt')

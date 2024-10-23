@@ -1,9 +1,10 @@
-require('dotenv').config();
 
+const Stripe = require('stripe');
 
 module.exports = class HotelService {
-    constructor(hotelRepo){
+    constructor(hotelRepo,stripeKey){
         this.hotelRepo = hotelRepo
+        this.stripe = new Stripe(stripeKey)
     }
 
     async getAllHotels(req) {
@@ -35,9 +36,9 @@ module.exports = class HotelService {
         }
     }
 
-    async updateHotel(data){
+    async updateHotel(id,data){
         try {
-            let msg = await this.hotelRepo.updateHotelRepo(data)
+            let msg = await this.hotelRepo.updateHotelRepo(id,data)
             return msg + " successfully"
         } catch (error) {
             throw error

@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
+const HttpException = require('./exceptions/exception')
 
 const app = express()
 app.use(express.json())
@@ -24,12 +25,23 @@ app.use('/v1/hotels',hotelRoutes)
 
 // error 
 app.use((err,req,res,next) => {
-    console.error(err.stack)
-    return res.status(500).json({
-        status: "error",
-        message: "server broken due to something",
-        error: err.stack,
-    })
+    if (err instanceof HttpException) {
+        return res.status(err.statusCode).json({
+            status: "error",
+            message: err.name,
+            error: err.message
+        })
+    }
+    return process.env.NODE_ENV === "production" ?
+        res.status(500).json({
+            status: "error",
+            message: "server broken due to something",
+            error: "Internal Server Error",
+        }): res.status(500).json({
+            status: "error",
+            message: err.message,
+            error: err.stack
+        })
 })
 
 

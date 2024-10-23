@@ -4,9 +4,12 @@ WORKDIR /app
 
 COPY package*.json .
 
+ARG NODE_ENV
+
 RUN npm install
 
 COPY . .
+
 
 EXPOSE 7000
 

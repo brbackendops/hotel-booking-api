@@ -16,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         constraints: false,
         onDelete: 'cascade',
         hooks: true
+      });
+
+      this.hasMany(models.Bookings,{
+        foreignKey: 'userId',
+        constraints: false,
+        onDelete: 'cascade',
+        hooks: true
       })
     }
   }

@@ -3,13 +3,16 @@ services:
   proxy:
     build:
       context: .
-      args:
-        - name=value
       dockerfile: Dockerfile.proxy
+    sysctls:
+      net.ipv4.ip_unprivileged_port_start: 0
+
     
   hotel_app:
     build:
       context: .
+      args:
+        - NODE_ENV=development
       dockerfile: Dockerfile.node
     ports:
       - "7000:7000"
@@ -17,8 +20,22 @@ services:
       - fileName
     depends_on:
       - db
+
   db:
-    image: ''
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=
+    ports:
+      - "5432:5432"
     volumes:
-      - ""
-      
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - net
+
+networks:
+  net:
+
+volumes:
+  postgres-data:

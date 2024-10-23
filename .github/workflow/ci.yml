@@ -2,12 +2,11 @@ name: hotel-booking-api
 run-name: ${{ github.actor }} is testing out
 on:
   push:
-    branches: ["main"]
+    branches: ["development"]
   pull_request:
-    branches: ["main"]
+    branches: ["development"]
 
 jobs:
-
   build:
     name: Build the APP
     runs-on: ubuntu-latest

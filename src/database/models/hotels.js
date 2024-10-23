@@ -14,7 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User,{
         foreignKey: 'id',
         constraints: false
-      })
+      });
+
+      this.hasMany(models.Bookings,{
+        foreignKey: 'hotelId',
+        constraints: false,
+        onDelete: 'cascade',
+        hooks: true
+      });
     }
   }
   Hotels.init({
@@ -37,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     pricePerNight: DataTypes.FLOAT,
     images: DataTypes.ARRAY(DataTypes.STRING),
-    lastUpdated: DataTypes.DATE
+    lastUpdated: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Hotels',
@@ -47,5 +54,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
   return Hotels;
 };

@@ -18,7 +18,7 @@ const hotelSchema = yup.object({
         )
     }).required(),
     location: yup.string().required(),
-    price_night: yup.object().shape({
+    pricePerNight: yup.object().shape({
         decimal: yup.number().test(
             'is-decimal',
             'invalid decimal',

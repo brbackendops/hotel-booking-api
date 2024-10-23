@@ -57,6 +57,9 @@ module.exports = class UserService {
             if (!is_correct) throw new Error("incorrect password detected");
 
             let data = {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 username: user.firstName + user.lastName,
                 email: user.email,                
             }
